@@ -2,11 +2,11 @@
   <show-process v-bind:loading="loading" v-if="this.loading"></show-process>
   <show-dialog v-else-if="this.err !== null" v-bind:message="this.err"></show-dialog>
   <div v-else-if="is_active" class="mdui-container">
-    <div class="mdui-row mdui-col-xs-12">
+    <div class="mdui-col mdui-col-xs-12">
       <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
                            v-bind:description="intro"></landing-description>
     </div>
-    <div class="mdui-row mdui-m-t-0">
+    <div class="mdui-col mdui-m-t-0">
       <template v-for="vote in groups">
         <landing-card v-bind:vote="vote"></landing-card>
       </template>
@@ -34,9 +34,7 @@ export default {
   },
   data () {
     return {
-      // url: 'https://vote.hfi.me/ticket/' + this.ticket,
-      url: 'https://gist.hfi.me/raw/ofugucocin',
-      // url: 'https://gist.hfi.me/raw/nemerinami',
+      url: 'https://vote.hfi.me/vote/ticket/' + this.ticket,
       votes: null,
       loading: false,
       err: null

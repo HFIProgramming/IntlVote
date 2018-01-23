@@ -9,21 +9,23 @@
         </div>
       </div>
     </div>
-    <div class="mdui-chip">
-      <span class="mdui-chip-title">开始时间: {{ vote.started_at }}</span>
-    </div>
-    <div class="mdui-chip">
-      <span class="mdui-chip-title">结束时间: {{ vote.ended_at }}</span>
-    </div>
-    <div class="mdui-chip">
-      <span class="mdui-chip-title">总投票人数: {{ vote.times }}</span>
+    <div class="mdui-card-content">
+      <div class="mdui-chip">
+        <span class="mdui-chip-title">开始时间: {{ vote.started_at }}</span>
+      </div>
+      <div class="mdui-chip">
+        <span class="mdui-chip-title">结束时间: {{ vote.ended_at }}</span>
+      </div>
+      <div class="mdui-chip">
+        <span class="mdui-chip-title">总投票人数: {{ vote.times }}</span>
+      </div>
     </div>
     <div class="mdui-card-actions">
       <button v-if="vote.is_voted === '1'" class="mdui-btn mdui-ripple" disabled>已经投过票</button>
       <button v-else-if="vote.vote_time" class="mdui-btn mdui-ripple" disabled>投票尚未开始</button>
       <router-link v-else
                    :to="url">
-        <button class="mdui-btn mdui-ripple">开始投票</button>
+        <button class="mdui-btn mdui-ripple mdui-btn-raised mdui-color-theme-accent">开始投票</button>
       </router-link>
       <router-link v-if="vote.show_result === '1'"
                    :to="url+'/result'">
@@ -37,9 +39,9 @@
   export default {
     props: ['vote', 'ticket'],
     name: 'landing-card',
-    data() {
+    data () {
       return {
-        url: this.$router.currentRoute.path + 'vote/' + this.vote.id
+        url: this.$router.currentRoute.path + '/vote/' + this.vote.id
       }
     },
     computed: {

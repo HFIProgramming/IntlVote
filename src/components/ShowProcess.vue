@@ -28,7 +28,7 @@
       show_process: function () {
         return new mdui.Dialog('#process', {
           history: false,
-          modal: false,
+          modal: true,
           destroyOnClosed: true
         });
       }

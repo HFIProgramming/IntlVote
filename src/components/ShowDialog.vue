@@ -24,13 +24,13 @@
       show_dialog: function () {
         return new mdui.Dialog('#dialog', {
           history: false,
-          modal: false,
-          destroyOnClosed: true,
-        });
+          modal: true,
+        })
       }
     },
     methods: {
       goBack: function () {
+        this.show_dialog.close()
         window.history.length > 1
           ? this.$router.go(-1)
           : this.$router.push('/')

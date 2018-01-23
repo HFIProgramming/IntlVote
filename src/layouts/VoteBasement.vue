@@ -1,10 +1,12 @@
 <template>
-  <div v-if="is_active" class="mdui-container">
-    <div class="mdui-row mdui-col-xs-12">
+  <show-process v-bind:loading="loading" v-if="this.loading"></show-process>
+  <show-dialog v-else-if="this.err !== null" v-bind:message="this.err"></show-dialog>
+  <div v-else-if="is_active" class="mdui-container">
+    <div class="mdui-col mdui-col-xs-12">
       <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
                            v-bind:description="description"></landing-description>
     </div>
-    <div class="mdui-row mdui-m-t-0">
+    <div class="mdui-col mdui-m-t-0">
       <vote-card v-bind:questions="questions" v-bind:url="url"></vote-card>
     </div>
   </div>
@@ -14,6 +16,8 @@
 <script>
 import VoteCard from '../components/VoteCard.vue'
 import ShowDialog from '../components/ShowDialog.vue'
+import ShowProcess from '../components/ShowProcess.vue'
+import LandingDescription from '../components/LandingDescription.vue'
 import mdui from 'mdui'
 
 export default {
@@ -21,28 +25,24 @@ export default {
   name: 'vote-basement',
   components: {
     VoteCard,
-    ShowDialog
+    LandingDescription,
+    ShowDialog,
+    ShowProcess
   },
   data () {
     return {
-      url: 'https://vote.hfi.me' + '/vote/id/' + this.vote_id + '/ticket/' + this.ticket
+      url: 'https://vote.hfi.me' + '/vote/id/' + this.vote_id + '/ticket/' + this.ticket,
+      json: null,
+      loading: false,
+      err: null
     }
   },
+  created: function () {
+    this.fetchData()
+  },
   computed: {
-    fetch_data: function () {
-      var json = null
-      mdui.JQ.ajax({
-        method: 'GET',
-        url: this.url,
-        success: function (data) {
-          json = JSON.parse(data).data
-        }
-      })
-
-      return json.data
-    },
     vote: function () {
-      return this.fetch_data.vote
+      return this.json.vote
     },
     title: function () {
       return this.vote.title
@@ -60,6 +60,23 @@ export default {
       return this.vote !== null && this.vote.is_voted === '0'
     }
   },
-  methods: {}
+  methods: {
+    fetchData () {
+      this.loading = true
+      // replace getPost with your data fetching util / API wrapper
+      mdui.JQ.ajax({
+        method: 'GET',
+        url: this.url,
+        success: (data) => {
+          this.loading = false
+          this.json = JSON.parse(data).data
+        },
+        error: (xhr, textStatus) => {
+          this.loading = false
+          this.err = '获取数据失败，请重试！'
+        }
+      })
+    }
+  }
 }
 </script>

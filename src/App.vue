@@ -5,7 +5,9 @@
       <span class="mdui-typo-title">Vote System</span>
       <div class="mdui-toolbar-spacer"></div>
     </div>
+    <transition>
     <router-view/>
+    </transition>
   </div>
 </template>
 

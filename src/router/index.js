@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Basement from '@/layouts/Basement'
 import VoteBasement from '@/layouts/VoteBasement'
+import NotFoundComponent from '@/layouts/NotFoundComponent'
 import Index from '@/layouts/Index'
 
 Vue.use(Router)
@@ -25,6 +26,7 @@ export default new Router({
       name: 'Basement',
       component: Basement,
       props: true
-    }
+    },
+    { path: '*', component: NotFoundComponent }
   ]
 })
