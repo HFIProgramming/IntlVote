@@ -1,5 +1,5 @@
 <template>
-  <div class="mdui-card mdui-m-t-5 mdui-col-xs-12 mdui-col-md-6">
+  <div class="mdui-card mdui-m-t-5 mdui-m-b-5 mdui-col-xs-12 mdui-col-md-6">
     <div class="mdui-card-media">
       <img src="../assets/card.jpg"/>
       <div class="mdui-card-media-covered">
@@ -20,7 +20,7 @@
         <span class="mdui-chip-title">总投票人数: {{ vote.times }}</span>
       </div>
     </div>
-    <div class="mdui-card-actions">
+    <div class="mdui-card-actions mdui-m-b-5">
       <button v-if="vote.is_voted === '1'" class="mdui-btn mdui-ripple" disabled>已经投过票</button>
       <button v-else-if="vote.vote_time" class="mdui-btn mdui-ripple" disabled>投票尚未开始</button>
       <router-link v-else

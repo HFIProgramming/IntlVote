@@ -8,7 +8,7 @@
     </div>
     <div class="mdui-col mdui-m-t-0">
       <template v-for="vote in groups">
-        <landing-card v-bind:vote="vote"></landing-card>
+        <landing-card v-bind="{vote: vote, ticket: ticket}"></landing-card>
       </template>
     </div>
   </div>
