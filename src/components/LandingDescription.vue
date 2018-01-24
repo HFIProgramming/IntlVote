@@ -16,8 +16,8 @@
 </template>
 
 <script>
-  export default {
-    props: ['title', 'subtitle', 'intro'],
-    name: 'landing-description',
-  }
+export default {
+  props: ['title', 'subtitle', 'intro'],
+  name: 'landing-description'
+}
 </script>

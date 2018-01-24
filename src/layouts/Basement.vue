@@ -21,7 +21,6 @@ import LandingCard from '../components/LandingCard.vue'
 import ShowDialog from '../components/ShowDialog.vue'
 import LandingDescription from '../components/LandingDescription.vue'
 import ShowProcess from '../components/ShowProcess.vue'
-import mdui from 'mdui'
 
 export default {
   props: ['ticket'],
@@ -69,7 +68,7 @@ export default {
     fetchData () {
       this.loading = true
       // replace getPost with your data fetching util / API wrapper
-      mdui.JQ.ajax({
+      this.$mdui.JQ.ajax({
         method: 'GET',
         url: this.url,
         success: (data) => {

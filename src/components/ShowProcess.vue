@@ -11,28 +11,27 @@
 </template>
 
 <script>
-  import mdui from 'mdui'
 
-  export default {
-    name: 'show-process',
-    mounted: function () {
-      this.show_process.open()
-    },
-    beforeDestroy: function () {
-      this.show_process.close()
-    },
-    destroy: function () {
-      mdui.mutation()
-    },
-    computed: {
-      show_process: function () {
-        return new mdui.Dialog('#process', {
-          history: false,
-          modal: true,
-          destroyOnClosed: true
-        });
-      }
+export default {
+  name: 'show-process',
+  mounted: function () {
+    this.show_process.open()
+  },
+  beforeDestroy: function () {
+    this.show_process.close()
+  },
+  destroy: function () {
+    this.$mdui.mutation()
+  },
+  computed: {
+    show_process: function () {
+      return new this.$mdui.Dialog('#process', {
+        history: false,
+        modal: true,
+        destroyOnClosed: true
+      })
     }
   }
+}
 
 </script>

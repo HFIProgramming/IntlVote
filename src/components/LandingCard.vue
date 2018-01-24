@@ -36,18 +36,18 @@
 </template>
 
 <script>
-  export default {
-    props: ['vote', 'ticket'],
-    name: 'landing-card',
-    data () {
-      return {
-        url: this.$router.currentRoute.path + '/vote/' + this.vote.id
-      }
-    },
-    computed: {
-      vote_time: function () {
-        return !(Date.parse(this.vote.started_at) <= Date.now() && Date.parse(this.vote.ended_at) >= Date.now())
-      },
+export default {
+  props: ['vote', 'ticket'],
+  name: 'landing-card',
+  data () {
+    return {
+      url: this.$router.currentRoute.path + 'vote/' + this.vote.id
+    }
+  },
+  computed: {
+    vote_time: function () {
+      return !(Date.parse(this.vote.started_at) <= Date.now() && Date.parse(this.vote.ended_at) >= Date.now())
     }
   }
+}
 </script>

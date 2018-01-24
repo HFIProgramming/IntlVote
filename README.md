@@ -1,6 +1,6 @@
-# hellovue
+# Sample Vote System SPA
 
-> A Vue.js project
+> A Vue.js project build with [MDUI](https://github.com/zdhxiong/mdui)
 
 ## Build Setup
 

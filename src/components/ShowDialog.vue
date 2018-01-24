@@ -10,33 +10,30 @@
   </div>
 </template>
 
-
 <script>
-  import mdui from 'mdui'
 
-  export default {
-    props: ['message'],
-    name: 'show-dialog',
-    mounted: function () {
-      this.show_dialog.open()
-    },
-    computed: {
-      show_dialog: function () {
-        return new mdui.Dialog('#dialog', {
-          history: false,
-          modal: true,
-        })
-      }
-    },
-    methods: {
-      goBack: function () {
-        this.show_dialog.close()
-        window.history.length > 1
-          ? this.$router.go(-1)
-          : this.$router.push('/')
-      }
+export default {
+  props: ['message'],
+  name: 'show-dialog',
+  mounted: function () {
+    this.show_dialog.open()
+  },
+  computed: {
+    show_dialog: function () {
+      return new this.$mdui.Dialog('#dialog', {
+        history: false,
+        modal: true
+      })
+    }
+  },
+  methods: {
+    goBack: function () {
+      this.show_dialog.close()
+      window.history.length > 1
+        ? this.$router.go(-1)
+        : this.$router.push('/')
     }
   }
+}
 
 </script>
-
