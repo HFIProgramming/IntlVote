@@ -75,7 +75,7 @@ export default {
           this.loading = false
           this.votes = JSON.parse(data)
           if (this.votes.status === '200'){
-            this.votes = this.vote.data
+            this.votes = this.votes.data
           }else{
             this.err = '内容无法加载！'+this.votes.message
           }
