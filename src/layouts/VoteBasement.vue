@@ -68,7 +68,12 @@ export default {
         url: this.url,
         success: (data) => {
           this.loading = false
-          this.json = JSON.parse(data).data
+          this.json = JSON.parse(data)
+          if (this.json.status === '200'){
+            this.json = this.json.data
+          }else{
+            this.err = '内容无法加载！'+this.json.message
+          }
         },
         error: (xhr, textStatus) => {
           this.loading = false

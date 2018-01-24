@@ -73,7 +73,12 @@ export default {
         url: this.url,
         success: (data) => {
           this.loading = false
-          this.votes = JSON.parse(data).data
+          this.votes = JSON.parse(data)
+          if (this.votes.status === '200'){
+            this.votes = this.vote.data
+          }else{
+            this.err = '内容无法加载！'+this.votes.message
+          }
         },
         error: (xhr, textStatus) => {
           this.loading = false
