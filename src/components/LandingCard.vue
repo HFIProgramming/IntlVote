@@ -24,11 +24,12 @@
       <button v-if="vote.is_voted === '1'" class="mdui-btn mdui-ripple" disabled>已经投过票</button>
       <button v-else-if="vote.vote_time" class="mdui-btn mdui-ripple" disabled>投票尚未开始</button>
       <router-link v-else
-                   :to="url">
+                   :to="{ name: 'VoteBasement', params: {ticket: ticket,vote_id: vote.id}}">
         <button class="mdui-btn mdui-ripple mdui-btn-raised mdui-color-theme-accent">开始投票</button>
       </router-link>
+      <!--Not Finished Yet-->
       <router-link v-if="vote.show_result === '1'"
-                   :to="url+'/result'">
+                   :to="'/'">
         <button class="mdui-btn mdui-ripple">查看结果</button>
       </router-link>
     </div>
@@ -39,11 +40,6 @@
 export default {
   props: ['vote', 'ticket'],
   name: 'landing-card',
-  data () {
-    return {
-      url: this.$router.currentRoute.path + 'vote/' + this.vote.id
-    }
-  },
   computed: {
     vote_time: function () {
       return !(Date.parse(this.vote.started_at) <= Date.now() && Date.parse(this.vote.ended_at) >= Date.now())

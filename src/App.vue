@@ -8,7 +8,7 @@
       <button @click="goForth()" class="mdui-btn mdui-btn-icon mdui-float-right" mdui-tooltip="{content: '前进'}"><i
         class="mdui-icon material-icons">arrow_forward</i></button>
     </div>
-    <transition>
+    <transition name="fade">
         <router-view/>
     </transition>
   </div>
