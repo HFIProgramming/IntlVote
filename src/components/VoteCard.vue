@@ -1,12 +1,11 @@
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submit_result()">
     <template v-for="question in questions">
     <vote-question v-bind:question="question"></vote-question>
     </template>
     <div class="mdui-card mdui-m-t-5 mdui-col-xs-12">
       <div class="mdui-card-content mdui-m-b-5">
-        <button class="mdui-btn mdui-ripple mdui-btn-raised mdui-color-theme-accent mdui-col-xs-12"
-                @click="submit_result()" v-bind:disabled="submit">提交
+        <button class="mdui-btn mdui-ripple mdui-btn-raised mdui-color-theme-accent mdui-col-xs-12" v-bind:disabled="submit">提交
         </button>
       </div>
     </div>
