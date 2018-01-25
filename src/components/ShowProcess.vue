@@ -15,17 +15,21 @@
 export default {
   name: 'show-process',
   mounted: function () {
-    this.show_process.open()
+    this.create_dialog()
+    this.dialog.open()
+  },
+  data() {
+    return {
+      dialog: null,
+    }
   },
   beforeDestroy: function () {
-    this.show_process.close()
+    this.dialog.close()
+    this.$mdui.JQ.unlockScreen()
   },
-  destroy: function () {
-    this.$mdui.mutation()
-  },
-  computed: {
-    show_process: function () {
-      return new this.$mdui.Dialog('#process', {
+  methods:{
+    create_dialog: function () {
+      this.dialog = new this.$mdui.Dialog('#process', {
         history: false,
         modal: true,
         destroyOnClosed: true

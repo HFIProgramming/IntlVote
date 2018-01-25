@@ -20,7 +20,8 @@ export default {
   },
   computed: {
     show_dialog: function () {
-      return new this.$mdui.Dialog('#dialog', {
+      return this.$mdui.Dialog('#dialog', {
+        destroyOnClosed: true,
         history: false,
         modal: true
       })
@@ -29,6 +30,7 @@ export default {
   methods: {
     goBack: function () {
       this.show_dialog.close()
+      this.$mdui.JQ.unlockScreen()
       window.history.length > 1
         ? this.$router.go(-1)
         : this.$router.push('/')

@@ -12,10 +12,7 @@
 export default {
   props: ['question_id', 'option'],
   name: 'vote-option',
-  data () {
-    return {}
-  },
-  method: {
+  methods: {
     emitState: function (value, event) {
       var state = null
       if (event.target.checked) {

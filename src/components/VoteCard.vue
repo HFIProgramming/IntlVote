@@ -53,7 +53,7 @@ export default {
             message: '提交成功！正在返回……',
             buttonText: '现在返回',
             onClose: function () {
-              this.$route.go(-1)
+              this.$router.go(-1)
             },
             timeout: 2000
           })
