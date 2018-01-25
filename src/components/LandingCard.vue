@@ -11,12 +11,15 @@
     </div>
     <div class="mdui-card-content">
       <div class="mdui-chip">
+        <span class="mdui-chip-icon mdui-color-blue"><i class="mdui-icon material-icons">access_time</i></span>
         <span class="mdui-chip-title">开始时间: {{ vote.started_at }}</span>
       </div>
       <div class="mdui-chip">
+        <span class="mdui-chip-icon mdui-color-pink"><i class="mdui-icon material-icons">timelapse</i></span>
         <span class="mdui-chip-title">结束时间: {{ vote.ended_at }}</span>
       </div>
       <div class="mdui-chip">
+        <span class="mdui-chip-icon"><i class="mdui-icon material-icons">people</i></span>
         <span class="mdui-chip-title">总投票人数: {{ vote.times }}</span>
       </div>
     </div>
@@ -28,10 +31,11 @@
         <button class="mdui-btn mdui-ripple mdui-btn-raised mdui-color-theme-accent">开始投票</button>
       </router-link>
       <!--Not Finished Yet-->
-      <router-link v-if="vote.show_result === '1'"
-                   :to="'/'">
-        <button class="mdui-btn mdui-ripple">查看结果</button>
+      <router-link v-if="vote.show_result === '1' && vote.is_voted === '1'"
+                   :to="{ name: 'VoteResult', params: {ticket: ticket,vote_id: vote.id}}">
+        <button class="mdui-btn mdui-ripple">查看当前投票结果</button>
       </router-link>
+      <button v-else class="mdui-btn mdui-ripple" disabled>投票后可以查看结果</button>
     </div>
   </div>
 </template>
