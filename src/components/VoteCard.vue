@@ -52,7 +52,10 @@ export default {
           this.$mdui.snackbar({
             message: '提交成功！正在返回……',
             buttonText: '现在返回',
-            onClose: function () {
+            onClick: () => {
+              this.$router.go(-1)
+            },
+            onClose: () => {
               this.$router.go(-1)
             },
             timeout: 2000

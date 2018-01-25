@@ -6,7 +6,7 @@
       <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
                            v-bind:description="description"></landing-description>
     </div>
-    <div class="mdui-col-xs-12 mdui-col-md-6 mdui-m-t-0">
+    <div class="mdui-col-xs-12 mdui-m-t-0">
       <vote-card v-bind:questions="questions" v-bind:url="url"></vote-card>
     </div>
   </div>

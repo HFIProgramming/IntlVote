@@ -16,20 +16,24 @@ export default {
   props: ['message'],
   name: 'show-dialog',
   mounted: function () {
-    this.show_dialog.open()
+    this.create_dialog()
+    this.dialog.open()
   },
-  computed: {
-    show_dialog: function () {
-      return this.$mdui.Dialog('#dialog', {
+  data () {
+    return {
+      dialog: null,
+    }
+  },
+  methods: {
+    create_dialog: function () {
+      this.dialog = new this.$mdui.Dialog('#dialog', {
         destroyOnClosed: true,
         history: false,
         modal: true
       })
-    }
-  },
-  methods: {
+    },
     goBack: function () {
-      this.show_dialog.close()
+      this.dialog.close()
       this.$mdui.JQ.unlockScreen()
       window.history.length > 1
         ? this.$router.go(-1)

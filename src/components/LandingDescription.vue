@@ -9,7 +9,7 @@
     </div>
 
     <!-- 卡片的内容 -->
-    <div class="mdui-card-content">{{ intro }}</div>
+    <div class="mdui-card-content">{{ description }}</div>
 
   </div>
 
@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  props: ['title', 'subtitle', 'intro'],
+  props: ['title', 'subtitle', 'description'],
   name: 'landing-description'
 }
 </script>

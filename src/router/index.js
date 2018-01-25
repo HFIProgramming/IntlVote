@@ -16,13 +16,13 @@ export default new Router({
       component: Index
     },
     {
-      path: '/ticket/:ticket/vote/:vote_id',
+      path: 'vote/ticket/:ticket/vote/:vote_id/',
       name: 'VoteBasement',
       component: VoteBasement,
       props: true
     },
     {
-      path: '/ticket/:ticket',
+      path: '/vote/ticket/:ticket/',
       name: 'Basement',
       component: Basement,
       props: true
