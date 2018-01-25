@@ -69,10 +69,10 @@ export default {
         success: (data) => {
           this.loading = false
           this.json = JSON.parse(data)
-          if (this.json.status === '200'){
+          if (this.json.status === '200') {
             this.json = this.json.data
-          }else{
-            this.err = '内容无法加载！'+this.json.message
+          } else {
+            this.err = '内容无法加载！' + this.json.message
           }
         },
         error: (xhr, textStatus) => {

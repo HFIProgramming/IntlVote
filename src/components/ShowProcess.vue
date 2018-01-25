@@ -18,16 +18,16 @@ export default {
     this.create_process()
     this.process.open()
   },
-  data() {
+  data () {
     return {
-      process: null,
+      process: null
     }
   },
   beforeDestroy: function () {
     this.process.close()
     this.$mdui.JQ.unlockScreen()
   },
-  methods:{
+  methods: {
     create_process: function () {
       this.process = new this.$mdui.Dialog('#process', {
         history: false,

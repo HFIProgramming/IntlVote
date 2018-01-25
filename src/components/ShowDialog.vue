@@ -21,7 +21,7 @@ export default {
   },
   data () {
     return {
-      dialog: null,
+      dialog: null
     }
   },
   methods: {
