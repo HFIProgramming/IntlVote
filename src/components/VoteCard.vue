@@ -4,8 +4,8 @@
       <vote-question v-bind:question="question"></vote-question>
     </template>
     <div class="mdui-card mdui-m-t-5 mdui-col-xs-12">
-      <div class="mdui-card-content mdui-m-b-5">
-        <button class="mdui-btn mdui-ripple mdui-btn-raised mdui-color-theme-accent mdui-col-xs-12"
+      <div class="mdui-card-content mdui-m-b-1">
+        <button class="mdui-btn mdui-ripple mdui-btn-raised mdui-color-theme-accent mdui-btn-block"
                 v-bind:disabled="submit">提交
         </button>
       </div>
@@ -20,11 +20,14 @@ export default {
   name: 'vote-card',
   props: ['questions', 'url'],
   computed: {
-    selectedQuestionNum: function () {
-      var filteredArray = this.selectedQuestion.filter((item, pos) => {
-        return this.selectedQuestion.indexOf(item) === pos
-      })
-      return filteredArray.length
+    allQuestionSelected: function () {
+      return this.selectedQuestionNum === this.questions.length
+    },
+    submit: function () {
+      if (this.manuallyLockSubmit) {
+        return true
+      }
+      return !this.allQuestionSelected
     }
   },
   components: {
@@ -32,11 +35,11 @@ export default {
   },
   data () {
     return {
-      submit: true,
       selectedSelection: [],
-      selectedQuestion: [],
-      notAllSelected: [],
-      confirmSelection: false,
+      selectedQuestion: {},
+      manuallyLockSubmit: false,
+      manuallyConfirmSelection: false,
+      selectedQuestionNum: 0,
       json: null,
       err: null
     }
@@ -45,25 +48,20 @@ export default {
     this.$bus.$on('change-option', (pack) => {
       if (pack.state === 'add') {
         this.selectedSelection.push(pack.option_id)
-        this.selectedQuestion.push(pack.question_id)
       } else if (pack.state === 'remove') {
-        this.selectedSelection = this.selectedSelection.filter(item => item !== pack.option_id)
-        this.selectedQuestion = this.selectedQuestion.filter(item => item !== pack.question_id)
+        this.selectedSelection.splice(this.selectedSelection.indexOf(pack.option_id), 1)
       }
     })
-    this.$bus.$on('not-all-selected', (pack) => {
-      if (pack.state === 'add') {
-        this.notAllSelected.push(pack.question_id)
-      } else if (pack.state === 'remove') {
-        this.notAllSelected = this.notAllSelected.filter(item => item !== pack.question_id)
-      }
+    this.$bus.$on('question-status', (pack) => {
+      this.selectedQuestion[pack.question_id] = pack.state
+      this.selectedQuestionNum += pack.status
     })
   },
   watch: {
     json: function (n, o) {
       if (n !== null) {
         if (this.err !== null) {
-          this.submit = false
+          this.manuallyLockSubmit = false
           this.$mdui.snackbar({
             message: this.err
           })
@@ -80,24 +78,18 @@ export default {
             timeout: 2000
           })
         } else {
-          this.submit = false
+          this.manuallyLockSubmit = false
           this.$mdui.snackbar({
             message: '提交数据时出现问题，请检查后重试！(存在问题：' + n.message + ')'
           })
         }
       }
-    },
-    selectedQuestion: function (n, o) {
-      this.submit = this.selectedQuestionNum !== this.questions.length
-    },
-    notAllSelected: function (n, o) {
-      this.confirmSelection = n.length === 0
     }
   },
   methods: {
     submit_result: function () {
-      if (this.confirmSelection) {
-        this.submit = true
+      if (this.confirmSelection()) {
+        this.manuallyLockSubmit = true
         this.$mdui.snackbar({
           message: '正在提交数据……',
           timeout: 1000
@@ -118,17 +110,30 @@ export default {
       }
     },
     create_warning: function () {
-      this.$mdui.confirm('部分问题是可以选择多个，但是你也可以选择放弃部分机会只给部分你希望选择的选项。点击确认键确认你的决定', '您还有可用的选项！',
+      this.$mdui.confirm('部分问题可以选择多个选项，但是您可以选择放弃部分投票机会只给你希望选择的选项投票。点击OK确认你的决定', '您还有可用的选项！',
         () => {
-          this.confirmSelection = true
+          this.manuallyConfirmSelection = true
           this.$mdui.snackbar({
             message: '请点击提交按钮提交投票'
           })
         },
         () => {
-          this.confirmSelection = false
+          this.manuallyConfirmSelection = false
         }
       )
+    },
+    confirmSelection: function () {
+      if (this.manuallyConfirmSelection) {
+        return true
+      }
+      let status = true
+      Object.keys(this.selectedQuestion).forEach((key) => {
+        // do something with obj[key]
+        if (this.selectedQuestion[key] !== 'fully-selected') {
+          status = false
+        }
+      })
+      return status
     }
   }
 }

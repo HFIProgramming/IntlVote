@@ -4,7 +4,8 @@
     <!-- 卡片的标题和副标题 -->
     <div class="mdui-card-primary">
       <div class="mdui-card-primary-title">{{ question.content }}</div>
-      <div class="mdui-card-primary-subtitle">这个问题您<mark>最多可以选择{{ question.range }}个选项</mark>
+      <div class="mdui-card-primary-subtitle">这个问题您
+        <mark>最多可以选择{{ question.range }}个选项</mark>
       </div>
     </div>
 
@@ -41,7 +42,7 @@ export default {
         if (pack.state === 'add') {
           this.selected_id.push(pack.option_id)
         } else if (pack.state === 'remove') {
-          this.selected_id = this.selected_id.filter(item => item !== pack.option_id)
+          this.selected_id.splice(this.selected_id.indexOf(pack.option_id), 1)
         }
       }
     })
@@ -52,9 +53,19 @@ export default {
     }
   },
   watch: {
-    currentAllSelected: function (n, o) {
-      let state = n ? 'remove' : 'add'
-      this.$bus.$emit('not-all-selected', {state: state, question_id: this.question_id, should_selected: this.question.range, now_selected: this.selected_id.length})
+    selectionStatus: function (n, o) {
+      let s
+      if (n === 'not-selected') {
+        s = -1
+      } else if (o === 'fully-selected' || o === 'partly-selected') {
+        s = 0
+      } else {
+        s = 1
+      }
+      if (n === o) {
+        s = 0
+      }
+      this.$bus.$emit('question-status', {state: n, question_id: this.question_id, status: s})
     }
   },
   computed: {
@@ -73,8 +84,14 @@ export default {
     locked: function () {
       return this.question.range <= this.selectedNumber
     },
-    currentAllSelected: function () {
-      return this.selected_id.length === parseInt(this.question.range)
+    selectionStatus: function () {
+      if (this.selected_id.length === parseInt(this.question.range)) {
+        return 'fully-selected'
+      } else if (this.selected_id.length === 0) {
+        return 'not-selected'
+      } else {
+        return 'partly-selected'
+      }
     }
   }
 }

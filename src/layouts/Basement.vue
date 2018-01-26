@@ -2,10 +2,9 @@
   <show-process v-bind:loading="loading" v-if="this.loading"></show-process>
   <show-dialog v-else-if="this.err !== null" v-bind:message="this.err"></show-dialog>
   <div v-else-if="is_active" class="mdui-container">
-    <div class="mdui-col-xs-12">
+
       <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
                            v-bind:description="intro"></landing-description>
-    </div>
     <div class="mdui-m-t-0">
       <template v-for="vote in groups">
         <landing-card v-bind="{vote: vote, ticket: ticket}"></landing-card>
@@ -62,6 +61,9 @@ export default {
     },
     is_active: function () {
       return this.votes !== null && this.votes.active === '1'
+    },
+    pic: function () {
+      return this.vote_group.picture
     }
   },
   methods: {
