@@ -8,9 +8,22 @@
       <button @click="goForth()" class="mdui-btn mdui-btn-icon mdui-float-right" mdui-tooltip="{content: '前进'}"><i
         class="mdui-icon material-icons">arrow_forward</i></button>
     </div>
-    <transition name="fade">
+    <div class="mdui-container">
+      <transition name="fade">
         <router-view/>
-    </transition>
+      </transition>
+    </div>
+    <div class="mdui-bottom-nav mdui-color-theme mdui-m-t-5">
+      <div class="mdui-container">
+        <div class="mdui-typo mdui-typo-caption mdui-text-center mdui-m-t-2">
+          编程社出品
+        </div>
+        <div class="mdui-typo-caption-opacity mdui-text-center">
+          Powered by HFIProgramming
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 

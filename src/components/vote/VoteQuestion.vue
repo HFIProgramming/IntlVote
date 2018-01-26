@@ -4,7 +4,8 @@
     <!-- 卡片的标题和副标题 -->
     <div class="mdui-card-primary">
       <div class="mdui-card-primary-title">{{ question.content }}</div>
-      <div class="mdui-card-primary-subtitle">这个问题您最多可以选择<mark>{{ question.range }}</mark>个选项</div>
+      <div class="mdui-card-primary-subtitle">这个问题您<mark>最多可以选择{{ question.range }}个选项</mark>
+      </div>
     </div>
 
     <!-- 卡片的内容 -->
@@ -50,6 +51,12 @@ export default {
       selected_id: []
     }
   },
+  watch: {
+    currentAllSelected: function (n, o) {
+      let state = n ? 'remove' : 'add'
+      this.$bus.$emit('not-all-selected', {state: state, question_id: this.question_id, should_selected: this.question.range, now_selected: this.selected_id.length})
+    }
+  },
   computed: {
     type: function () {
       return this.question.range === '1' ? 'radio' : 'checkbox'
@@ -65,6 +72,9 @@ export default {
     },
     locked: function () {
       return this.question.range <= this.selectedNumber
+    },
+    currentAllSelected: function () {
+      return this.selected_id.length === parseInt(this.question.range)
     }
   }
 }

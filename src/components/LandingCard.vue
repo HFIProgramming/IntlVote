@@ -19,11 +19,16 @@
         <span class="mdui-chip-title">结束时间: {{ vote.ended_at }}</span>
       </div>
       <div class="mdui-chip">
+        <span class="mdui-chip-icon mdui-color-purple"><i class="mdui-icon material-icons">adjust</i></span>
+        <span class="mdui-chip-title" v-if="vote.vote_time">距离开始还有 {{ vote_start }}</span>
+        <span class="mdui-chip-title" v-else>距离结束还有 {{ vote_end }}</span>
+      </div>
+      <div class="mdui-chip">
         <span class="mdui-chip-icon"><i class="mdui-icon material-icons">people</i></span>
         <span class="mdui-chip-title">总投票人数: {{ vote.times }}</span>
       </div>
     </div>
-    <div class="mdui-card-actions mdui-m-b-5">
+    <div class="mdui-card-actions mdui-m-b-3">
       <button v-if="vote.is_voted === '1'" class="mdui-btn mdui-ripple" disabled>已经投过票</button>
       <button v-else-if="vote.vote_time" class="mdui-btn mdui-ripple" disabled>投票尚未开始</button>
       <router-link v-else
@@ -44,6 +49,12 @@
 export default {
   props: ['vote', 'ticket'],
   name: 'landing-card',
+  data () {
+    return {
+      vote_start: this.$moment(this.vote.started_at).toNow(),
+      vote_end: this.$moment(this.vote.ended_at).fromNow()
+    }
+  },
   computed: {
     vote_time: function () {
       return !(Date.parse(this.vote.started_at) <= Date.now() && Date.parse(this.vote.ended_at) >= Date.now())

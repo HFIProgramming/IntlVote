@@ -1,5 +1,5 @@
 <template>
-  <div class="mdui-card mdui-m-t-5 mdui-col-xs-12">
+  <div class="mdui-card mdui-m-t-5 mdui-m-b-5 mdui-col-xs-12">
 
     <!-- 卡片的标题和副标题 -->
     <div class="mdui-card-primary">
