@@ -14,10 +14,7 @@
       <div class="mdui-typo-caption">{{ question.explanation }}</div>
       <div class="mdui-container">
         <div v-for="option in options" class="mdui-col-4">
-          <vote-option v-if="type === 'radio'"
-                       v-bind="{question_id: question_id, option: option, has_selected: has_selected}"></vote-option>
-          <vote-multiple-option v-else-if="type === 'checkbox'"
-                                v-bind="{question_id: question_id, option: option, locked: locked, has_selected: has_selected}"></vote-multiple-option>
+          <vote-multiple-option v-bind="{question_id: question_id, option: option, locked: locked, has_selected: has_selected}"></vote-multiple-option>
         </div>
       </div>
     </div>
@@ -26,14 +23,12 @@
 </template>
 
 <script>
-import VoteOption from './VoteOption.vue'
 import VoteMultipleOption from './VoteMultipleOption.vue'
 
 export default {
   name: 'vote-question',
   props: ['question', 'has_selected'],
   components: {
-    VoteOption,
     VoteMultipleOption
   },
   created: function () {
@@ -42,7 +37,7 @@ export default {
         if (pack.state === 'add') {
           this.selected_id.push(pack.option_id)
         } else if (pack.state === 'remove') {
-          this.selected_id.splice(this.selected_id.indexOf(pack.option_id), 1)
+          this.selected_id.splice(this.selected_id.indexOf(pack.option_id))
         }
       }
     })

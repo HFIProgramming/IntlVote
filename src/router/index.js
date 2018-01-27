@@ -16,7 +16,7 @@ export default new Router({
       name: 'Index',
       component: Index,
       meta: {
-        keepAlive: true // 不需要被缓存
+        keepAlive: true
       }
     },
     {
@@ -25,7 +25,7 @@ export default new Router({
       component: VoteBasement,
       props: true,
       meta: {
-        keepAlive: true // 需要被缓存
+        keepAlive: false
       }
     },
     {

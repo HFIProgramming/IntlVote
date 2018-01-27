@@ -38,7 +38,7 @@ import TopButton from './components/TopButton.vue'
 export default {
   name: 'App',
   components: {
-    TopButton
+    TopButton,
   },
   methods: {
     goBack: function () {
