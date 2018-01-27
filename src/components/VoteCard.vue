@@ -18,7 +18,16 @@ import VoteQuestion from './vote/VoteQuestion.vue'
 
 export default {
   name: 'vote-card',
-  props: ['questions', 'url'],
+  props: {questions: null,
+    url: {
+      type: String,
+      required: true
+    },
+    end_word:{
+      type: String,
+      default: '感谢您投出宝贵的一票！'
+    }
+  },
   computed: {
     allQuestionSelected: function () {
       return this.selectedQuestionNum === this.questions.length
@@ -66,17 +75,19 @@ export default {
             message: this.err
           })
         } else if (n.status === '200') {
-          this.$mdui.snackbar({
-            message: '提交成功！正在返回……',
-            buttonText: '现在返回',
-            onClick: () => {
-              this.$router.go(-1)
-            },
-            onClose: () => {
-              this.$router.go(-1)
-            },
-            timeout: 2000
-          })
+          this.$mdui.alert(this.end_word, () => {
+            this.$mdui.snackbar({
+              message: '提交成功！正在返回……',
+              buttonText: '现在返回',
+              onClick: () => {
+                this.$router.go(-1)
+              },
+              onClose: () => {
+                this.$router.go(-1)
+              },
+              timeout: 2000
+            })
+          }, {modal: true, confirmText: '我知道了'});
         } else {
           this.manuallyLockSubmit = false
           this.$mdui.snackbar({

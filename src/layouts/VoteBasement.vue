@@ -58,6 +58,9 @@ export default {
     },
     pic: function () {
       return this.vote.picture
+    },
+    end_word: function () {
+      return this.vote.end_word
     }
   },
   methods: {
