@@ -12,8 +12,8 @@
 export default {
   props: ['question_id', 'option', 'has_selected'],
   name: 'vote-option',
-  created: function () {
-    if (this.has_selected.indexOf(this.option.id) !== -1){
+  mounted: function () {
+    if (this.has_selected.indexOf(this.option.id) !== -1) {
       this.is_selected = true
       this.startEmit('add')
     }

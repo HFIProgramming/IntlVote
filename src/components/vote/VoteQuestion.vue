@@ -36,7 +36,7 @@ export default {
     VoteOption,
     VoteMultipleOption
   },
-  mounted: function () {
+  created: function () {
     this.$bus.$on('change-option', (pack) => {
       if (pack.question_id === this.question.id) { // myself
         if (pack.state === 'add') {

@@ -47,8 +47,8 @@ export default {
   name: 'landing-card',
   data () {
     return {
-      vote_start: this.$moment(this.vote.started_at),
-      vote_end: this.$moment(this.vote.ended_at)
+      vote_start: this.$moment(this.vote.started_at, 'YYYY-MM-DD HH:mm:ss'),
+      vote_end: this.$moment(this.vote.ended_at, 'YYYY-MM-DD HH:mm:ss')
     }
   },
   computed: {

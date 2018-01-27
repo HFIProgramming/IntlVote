@@ -30,7 +30,7 @@ export default {
     },
     has_selected: {
       type: null,
-      default: function () {return []},
+      default: function () { return [] }
     }
   },
   computed: {
@@ -58,7 +58,7 @@ export default {
       err: null
     }
   },
-  mounted: function () {
+  created: function () {
     this.$bus.$on('change-option', (pack) => {
       if (pack.state === 'add') {
         this.selectedSelection.push(pack.option_id)
@@ -101,12 +101,12 @@ export default {
         }
       }
     },
-    selectedSelection: function (n,o){
-        this.$mdui.JQ.ajax({
-          method: 'POST',
-          url: this.url+'/cache',
-          data: JSON.stringify({selected: this.selectedSelection}),
-        })
+    selectedSelection: function (n, o) {
+      this.$mdui.JQ.ajax({
+        method: 'POST',
+        url: this.url + '/cache',
+        data: JSON.stringify({selected: this.selectedSelection})
+      })
     }
   },
   methods: {

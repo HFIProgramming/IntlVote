@@ -63,9 +63,9 @@ export default {
       return this.vote.end_word
     },
     has_selected: function () {
-      if (this.vote.has_selected !== null){
+      if (this.vote.has_selected !== null) {
         return this.vote.has_selected
-      }else{
+      } else {
         return []
       }
     }
