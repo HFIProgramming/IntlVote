@@ -14,25 +14,37 @@ export default new Router({
     {
       path: '/',
       name: 'Index',
-      component: Index
+      component: Index,
+      meta: {
+        keepAlive: true // 不需要被缓存
+      }
     },
     {
       path: '/vote/ticket/:ticket/vote/:vote_id/',
       name: 'VoteBasement',
       component: VoteBasement,
-      props: true
+      props: true,
+      meta: {
+        keepAlive: true // 需要被缓存
+      }
     },
     {
       path: '/vote/ticket/:ticket/',
       name: 'Basement',
       component: Basement,
-      props: true
+      props: true,
+      meta: {
+        keepAlive: false // 不需要被缓存
+      }
     },
     {
       path: 'vote/ticket/:ticket/vote/:vote_id/result',
       name: 'VoteResult',
       component: VoteResult,
-      props: true
+      props: true,
+      meta: {
+        keepAlive: false // 不需要被缓存
+      }
     },
     { path: '*', component: NotFoundComponent }
   ]

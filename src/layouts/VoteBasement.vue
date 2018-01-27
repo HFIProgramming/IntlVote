@@ -5,7 +5,7 @@
     <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
                          v-bind:description="description"></landing-description>
     <div class="mdui-col-xs-12 mdui-m-t-2">
-      <vote-card v-bind:questions="questions" v-bind:url="url"></vote-card>
+      <vote-card v-bind="{questions: questions, has_selected: has_selected}" v-bind:url="url"></vote-card>
     </div>
   </div>
   <show-dialog v-else v-bind:message="`操作将不能进行，请返回`"></show-dialog>
@@ -61,6 +61,13 @@ export default {
     },
     end_word: function () {
       return this.vote.end_word
+    },
+    has_selected: function () {
+      if (this.vote.has_selected !== null){
+        return this.vote.has_selected
+      }else{
+        return []
+      }
     }
   },
   methods: {

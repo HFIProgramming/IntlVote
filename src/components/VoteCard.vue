@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit_result()">
     <template v-for="question in questions">
-      <vote-question v-bind:question="question"></vote-question>
+      <vote-question v-bind="{question: question, has_selected: has_selected}"></vote-question>
     </template>
     <div class="mdui-card mdui-m-t-5 mdui-col-xs-12">
       <div class="mdui-card-content mdui-m-b-1">
@@ -18,14 +18,19 @@ import VoteQuestion from './vote/VoteQuestion.vue'
 
 export default {
   name: 'vote-card',
-  props: {questions: null,
+  props: {
+    questions: null,
     url: {
       type: String,
       required: true
     },
-    end_word:{
+    end_word: {
       type: String,
       default: '感谢您投出宝贵的一票！'
+    },
+    has_selected: {
+      type: null,
+      default: function () {return []},
     }
   },
   computed: {
@@ -87,7 +92,7 @@ export default {
               },
               timeout: 2000
             })
-          }, {modal: true, confirmText: '我知道了'});
+          }, {modal: true, confirmText: '我知道了'})
         } else {
           this.manuallyLockSubmit = false
           this.$mdui.snackbar({
@@ -95,6 +100,13 @@ export default {
           })
         }
       }
+    },
+    selectedSelection: function (n,o){
+        this.$mdui.JQ.ajax({
+          method: 'POST',
+          url: this.url+'/cache',
+          data: JSON.stringify({selected: this.selectedSelection}),
+        })
     }
   },
   methods: {

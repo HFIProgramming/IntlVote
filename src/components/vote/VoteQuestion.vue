@@ -15,9 +15,9 @@
       <div class="mdui-container">
         <div v-for="option in options" class="mdui-col-4">
           <vote-option v-if="type === 'radio'"
-                       v-bind="{question_id: question_id, option: option}"></vote-option>
+                       v-bind="{question_id: question_id, option: option, has_selected: has_selected}"></vote-option>
           <vote-multiple-option v-else-if="type === 'checkbox'"
-                                v-bind="{question_id: question_id, option: option, locked: locked}"></vote-multiple-option>
+                                v-bind="{question_id: question_id, option: option, locked: locked, has_selected: has_selected}"></vote-multiple-option>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@ import VoteMultipleOption from './VoteMultipleOption.vue'
 
 export default {
   name: 'vote-question',
-  props: ['question'],
+  props: ['question', 'has_selected'],
   components: {
     VoteOption,
     VoteMultipleOption

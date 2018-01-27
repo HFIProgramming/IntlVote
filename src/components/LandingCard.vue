@@ -31,12 +31,12 @@
                    :to="{ name: 'VoteBasement', params: {ticket: ticket,vote_id: vote.id}}">
         <button class="mdui-btn mdui-ripple mdui-btn-raised mdui-color-theme-accent">开始投票</button>
       </router-link>
-      <!--Not Finished Yet-->
-      <router-link v-if="vote.show_result === '1' && vote.is_voted === '1'"
+      <button v-if="vote.show_result !== '1'" class="mdui-btn mdui-ripple" disabled>当前投票不显示结果</button>
+      <router-link v-else-if="vote.is_voted === '1'"
                    :to="{ name: 'VoteResult', params: {ticket: ticket,vote_id: vote.id}}">
         <button class="mdui-btn mdui-ripple">查看当前投票结果</button>
       </router-link>
-      <button v-else class="mdui-btn mdui-ripple" disabled>投票后可以查看结果</button>
+      <button v-else class="mdui-btn mdui-ripple" disabled>投票后方可查看结果</button>
     </div>
   </div>
 </template>

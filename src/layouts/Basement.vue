@@ -64,7 +64,7 @@ export default {
     },
     pic: function () {
       return this.vote_group.picture
-    },
+    }
   },
   methods: {
     fetchData () {
