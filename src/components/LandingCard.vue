@@ -15,7 +15,7 @@
       </div>
       <div class="mdui-chip">
         <span class="mdui-chip-icon mdui-color-purple"><i class="mdui-icon material-icons">adjust</i></span>
-        <span class="mdui-chip-title" v-if="vote_before">在 {{ vote_start.toNow() }} 开始</span>
+        <span class="mdui-chip-title" v-if="vote_before">在 {{ vote_start.fromNow() }} 开始</span>
         <span class="mdui-chip-title" v-else-if="vote_time">在 {{ vote_end.fromNow() }} 结束</span>
         <span class="mdui-chip-title" v-else-if="vote_after">在 {{ vote_end.fromNow() }} 结束</span>
       </div>

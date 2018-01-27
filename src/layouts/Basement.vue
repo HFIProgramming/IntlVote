@@ -2,14 +2,13 @@
   <show-process v-bind:loading="loading" v-if="this.loading"></show-process>
   <show-dialog v-else-if="this.err !== null" v-bind:message="this.err"></show-dialog>
   <div v-else-if="is_active" class="mdui-container">
-
-      <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
-                           v-bind:description="intro"></landing-description>
+      <landing-description v-bind="{title:title, subtitle: subtitle, description: intro, pic: pic}"></landing-description>
     <div class="mdui-m-t-0">
       <template v-for="vote in groups">
         <landing-card v-bind="{vote: vote, ticket: ticket}"></landing-card>
       </template>
     </div>
+    <extra-card v-if="this.extra !== undefined" v-bind:extra="extra"></extra-card>
   </div>
   <show-dialog v-else v-bind:message="`该投票劵无效, 请联系工作人员`"></show-dialog>
 
@@ -20,6 +19,7 @@ import LandingCard from '../components/LandingCard.vue'
 import ShowDialog from '../components/ShowDialog.vue'
 import LandingDescription from '../components/LandingDescription.vue'
 import ShowProcess from '../components/ShowProcess.vue'
+import ExtraCard from '../components/ExtraCard.vue'
 
 export default {
   props: ['ticket'],
@@ -28,7 +28,8 @@ export default {
     ShowDialog,
     LandingCard,
     LandingDescription,
-    ShowProcess
+    ShowProcess,
+    ExtraCard
   },
   data () {
     return {
@@ -64,10 +65,13 @@ export default {
     },
     pic: function () {
       return this.vote_group.picture
+    },
+    extra: function () {
+      return this.vote_group.extra
     }
   },
   methods: {
-    fetchData () {
+    fetchData: function () {
       this.loading = true
       // replace getPost with your data fetching util / API wrapper
       this.$mdui.JQ.ajax({
@@ -87,7 +91,7 @@ export default {
           this.err = '获取数据失败，请重试！'
         }
       })
-    }
+    },
   }
 }
 </script>

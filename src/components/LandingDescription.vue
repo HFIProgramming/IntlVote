@@ -4,7 +4,7 @@
 
       <!-- 卡片的标题和副标题 -->
       <div class="mdui-card-media">
-        <img v-bind:src="picture"/>
+        <img v-bind:src="pic"/>
         <div class="mdui-card-media-covered">
           <div class="mdui-card-primary">
             <div class="mdui-card-primary-title">{{ title }}</div>
@@ -22,16 +22,11 @@
 
 <script>
 export default {
-  props: ['title', 'subtitle', 'description', 'pic'],
-  name: 'landing-description',
-  computed: {
-    has_pic: function () {
-      return this.pic !== undefined
-    },
-    picture: function () {
-      if (!this.has_pic) return 'https://static.hfi.me/images/vote/card.jpg'
-      return this.pic
+  props: {'title': String, 'subtitle': String, 'description': String, 'pic': {
+      type: String,
+      default: 'https://static.hfi.me/images/vote/card.jpg'
     }
-  }
+  },
+  name: 'landing-description',
 }
 </script>
