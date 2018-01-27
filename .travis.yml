@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - node
+  - 8
 
 cache:
   directories:
@@ -12,4 +12,5 @@ before_script:
 
 script:
   - npm run build
+  - node_modules/.bin/eslint --fix "./src/**"
   - firebase deploy --token $FIREBASE_DEPLOY_KEY
