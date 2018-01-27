@@ -12,6 +12,10 @@
             <div class="mdui-col-xs-12">
               {{ option.count }} 人投给这个选项，占总投票的 {{ option.percent }}%
             </div>
+            <div v-if="option.is_chosen === '1'" class="mdui-chip">
+              <span class="mdui-chip-icon mdui-color-yellow"><i class="mdui-icon material-icons">check</i></span>
+              <span class="mdui-chip-title">我的选择</span>
+            </div>
             <div class="mdui-progress mdui-col-xs-12">
               <div class="mdui-progress-determinate" v-bind:style="'width: '+option.percent+'%;'"></div>
             </div>
@@ -39,9 +43,9 @@ export default {
         case 1:
           return 'mdui-color-red'
         case 2:
-          return 'mdui-color-blue'
-        case 3:
           return 'mdui-color-teal'
+        case 3:
+          return 'mdui-color-indigo'
         default:
           return ''
       }

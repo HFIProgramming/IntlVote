@@ -4,9 +4,7 @@
     <!-- 卡片的标题和副标题 -->
     <div class="mdui-card-primary">
       <div class="mdui-card-primary-title">{{ question.content }}</div>
-      <div class="mdui-card-primary-subtitle">这个问题您最多可以选择
-        <mark>{{ question.range }}</mark>
-        个选项
+      <div class="mdui-card-primary-subtitle">这个问题您<mark>最多可以选择{{ question.range }}个选项</mark>
       </div>
     </div>
 

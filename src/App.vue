@@ -16,20 +16,25 @@
     <div class="mdui-bottom-nav mdui-color-theme mdui-m-t-5">
       <div class="mdui-container">
         <div class="mdui-typo mdui-typo-caption mdui-text-center mdui-m-t-2">
-          编程社出品
+          Made with ❤️
         </div>
         <div class="mdui-typo-caption-opacity mdui-text-center">
-          Powered by HFIProgramming
+          Powered by HFIProgramming | 华附（国际部）编程社
         </div>
       </div>
     </div>
-
+    <top-button></top-button>
   </div>
 </template>
 
 <script>
+import TopButton from './components/TopButton.vue'
+
 export default {
   name: 'App',
+  components: {
+    TopButton
+  },
   methods: {
     goBack: function () {
       window.history.length > 1
