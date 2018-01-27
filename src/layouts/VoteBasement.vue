@@ -57,7 +57,7 @@ export default {
       return this.vote !== null && this.vote.is_voted === '0'
     },
     pic: function () {
-      return this.vote.picture
+      return this.vote.picture === null ? undefined : this.vote.picture
     },
     end_word: function () {
       return this.vote.end_word

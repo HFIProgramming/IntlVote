@@ -3,8 +3,7 @@
   <show-dialog v-else-if="this.err !== null" v-bind:message="this.err"></show-dialog>
   <div class="mdui-container" v-else>
     <div class="mdui-col-xs-12">
-      <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
-                           v-bind:description="description"></landing-description>
+      <landing-description v-bind="{title:title, subtitle: subtitle, description: intro, pic: pic}"></landing-description>
     </div>
     <div class="mdui-col-xs-12 mdui-m-t-0">
       <template v-for="question in questions">

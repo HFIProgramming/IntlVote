@@ -64,7 +64,7 @@ export default {
       return this.votes !== null && this.votes.active === '1'
     },
     pic: function () {
-      return this.vote_group.picture
+      return this.vote_group.picture === null ? undefined : this.vote_group.picture
     },
     extra: function () {
       return this.vote_group.extra
