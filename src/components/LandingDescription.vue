@@ -7,14 +7,14 @@
         <img v-bind:src="pic"/>
         <div class="mdui-card-media-covered">
           <div class="mdui-card-primary">
-            <div class="mdui-card-primary-title">{{ title }}</div>
+            <div class="mdui-card-primary-title"><span v-html="title"></span></div>
             <div class="mdui-card-primary-subtitle">{{ subtitle }}</div>
           </div>
         </div>
       </div>
 
       <!-- 卡片的内容 -->
-      <div class="mdui-card-content">{{ description }}</div>
+      <div class="mdui-card-content"><span v-html="description"></span></div>
 
     </div>
   </div>
