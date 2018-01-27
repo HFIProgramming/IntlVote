@@ -38,7 +38,7 @@ export default new Router({
       }
     },
     {
-      path: 'vote/ticket/:ticket/vote/:vote_id/result',
+      path: '/vote/ticket/:ticket/vote/:vote_id/result',
       name: 'VoteResult',
       component: VoteResult,
       props: true,
