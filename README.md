@@ -2,6 +2,9 @@
 
 > A Vue.js project build with [MDUI](https://github.com/zdhxiong/mdui)
 
+**Note: This project is a sample to test how to integrate MDUI into Vue, and it is a test project. The demo and code may no longer maintained or available in the future time**
+
+
 ## Build Setup
 
 ``` bash
@@ -19,3 +22,9 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+
+## Demo
+
+- https://hfinotice.com/
+- https://hfinotice.com/vote/ticket/shit
