@@ -2,7 +2,7 @@
 
 > A Vue.js project build with [MDUI](https://github.com/zdhxiong/mdui)
 
-**Note: This project is a sample to test how to integrate MDUI into Vue, and it is a test project. The demo and code may no longer maintained or available in the future time**
+**Note: This project is a sample to test how to integrate MDUI into Vue, and it is a test project (still ready on production in small scale). The demo and code may no longer maintained or available in the future time**
 
 
 ## Build Setup
