@@ -7,7 +7,7 @@
                            v-bind:description="intro"></landing-description>
     <div class="mdui-m-t-0">
       <template v-for="vote in groups">
-        <landing-card v-bind="{vote: vote, ticket: ticket}"></landing-card>
+        <landing-card v-bind="{vote: vote, ticket: ticket}" v-bind:key="vote.id"></landing-card>
       </template>
     </div>
   </div>
@@ -64,7 +64,7 @@ export default {
     },
     pic: function () {
       return this.vote_group.picture
-    },
+    }
   },
   methods: {
     fetchData () {
@@ -73,7 +73,7 @@ export default {
       this.$mdui.JQ.ajax({
         method: 'GET',
         url: this.url,
-        success: (data) => {
+        success: data => {
           this.loading = false
           this.votes = JSON.parse(data)
           if (this.votes.status === '200') {

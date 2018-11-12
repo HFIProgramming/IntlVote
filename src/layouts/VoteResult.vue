@@ -8,7 +8,7 @@
     </div>
     <div class="mdui-col-xs-12 mdui-m-t-0">
       <template v-for="question in questions">
-      <vote-result-card v-bind:question="question"></vote-result-card>
+      <vote-result-card v-bind:question="question" v-bind:key="question.id"></vote-result-card>
       </template>
     </div>
   </div>
@@ -31,7 +31,13 @@ export default {
   },
   data () {
     return {
-      url: 'https://vote.hfi.me' + '/vote/id/' + this.vote_id + '/ticket/' + this.ticket + '/result',
+      url:
+        'https://vote.hfi.me' +
+        '/vote/id/' +
+        this.vote_id +
+        '/ticket/' +
+        this.ticket +
+        '/result',
       json: null,
       loading: false,
       err: null
@@ -61,7 +67,7 @@ export default {
       this.$mdui.JQ.ajax({
         method: 'GET',
         url: this.url,
-        success: (data) => {
+        success: data => {
           this.loading = false
           this.json = JSON.parse(data)
           if (this.json.status === '200') {

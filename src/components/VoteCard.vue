@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="submit_result()">
     <template v-for="question in questions">
-      <vote-question v-bind:question="question"></vote-question>
+      <vote-question v-bind:question="question" v-bind:key="question.id"></vote-question>
     </template>
     <div class="mdui-card mdui-m-t-5 mdui-col-xs-12">
       <div class="mdui-card-content mdui-m-b-1">
@@ -18,12 +18,13 @@ import VoteQuestion from './vote/VoteQuestion.vue'
 
 export default {
   name: 'vote-card',
-  props: {questions: null,
+  props: {
+    questions: null,
     url: {
       type: String,
       required: true
     },
-    end_word:{
+    end_word: {
       type: String,
       default: '感谢您投出宝贵的一票！'
     }
@@ -54,14 +55,17 @@ export default {
     }
   },
   mounted: function () {
-    this.$bus.$on('change-option', (pack) => {
+    this.$bus.$on('change-option', pack => {
       if (pack.state === 'add') {
         this.selectedSelection.push(pack.option_id)
       } else if (pack.state === 'remove') {
-        this.selectedSelection.splice(this.selectedSelection.indexOf(pack.option_id), 1)
+        this.selectedSelection.splice(
+          this.selectedSelection.indexOf(pack.option_id),
+          1
+        )
       }
     })
-    this.$bus.$on('question-status', (pack) => {
+    this.$bus.$on('question-status', pack => {
       this.selectedQuestion[pack.question_id] = pack.state
       this.selectedQuestionNum += pack.status
     })
@@ -75,23 +79,28 @@ export default {
             message: this.err
           })
         } else if (n.status === '200') {
-          this.$mdui.alert(this.end_word, () => {
-            this.$mdui.snackbar({
-              message: '提交成功！正在返回……',
-              buttonText: '现在返回',
-              onClick: () => {
-                this.$router.go(-1)
-              },
-              onClose: () => {
-                this.$router.go(-1)
-              },
-              timeout: 2000
-            })
-          }, {modal: true, confirmText: '我知道了'});
+          this.$mdui.alert(
+            this.end_word,
+            () => {
+              this.$mdui.snackbar({
+                message: '提交成功！正在返回……',
+                buttonText: '现在返回',
+                onClick: () => {
+                  this.$router.go(-1)
+                },
+                onClose: () => {
+                  this.$router.go(-1)
+                },
+                timeout: 2000
+              })
+            },
+            { modal: true, confirmText: '我知道了' }
+          )
         } else {
           this.manuallyLockSubmit = false
           this.$mdui.snackbar({
-            message: '提交数据时出现问题，请检查后重试！(存在问题：' + n.message + ')'
+            message:
+              '提交数据时出现问题，请检查后重试！(存在问题：' + n.message + ')'
           })
         }
       }
@@ -108,11 +117,11 @@ export default {
         this.$mdui.JQ.ajax({
           method: 'POST',
           url: this.url,
-          data: JSON.stringify({selected: this.selectedSelection}),
-          success: (data) => {
+          data: JSON.stringify({ selected: this.selectedSelection }),
+          success: data => {
             this.json = JSON.parse(data)
           },
-          error: (data) => {
+          error: data => {
             this.err = '服务器请求出错！请稍后再试'
           }
         })
@@ -121,7 +130,9 @@ export default {
       }
     },
     create_warning: function () {
-      this.$mdui.confirm('部分问题可以选择多个选项，但是您可以选择放弃部分投票机会只给你希望选择的选项投票。点击OK确认你的决定', '您还有可用的选项！',
+      this.$mdui.confirm(
+        '部分问题可以选择多个选项，但是您可以选择放弃部分投票机会只给你希望选择的选项投票。点击OK确认你的决定',
+        '您还有可用的选项！',
         () => {
           this.manuallyConfirmSelection = true
           this.$mdui.snackbar({
@@ -138,7 +149,7 @@ export default {
         return true
       }
       let status = true
-      Object.keys(this.selectedQuestion).forEach((key) => {
+      Object.keys(this.selectedQuestion).forEach(key => {
         // do something with obj[key]
         if (this.selectedQuestion[key] !== 'fully-selected') {
           status = false

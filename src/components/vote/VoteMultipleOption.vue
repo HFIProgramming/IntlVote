@@ -8,13 +8,15 @@
 </template>
 
 <script>
-
 export default {
   props: ['question_id', 'option', 'locked'],
   name: 'vote-multiple-option',
   computed: {
     getLocked: function () {
-      if (this.is_selected === false && this.locked === true) {
+      if (this.locked) {
+        if (this.is_selected) {
+          return false
+        }
         return true
       } else {
         return false
@@ -22,7 +24,7 @@ export default {
     }
   },
   data () {
-    return {is_selected: false}
+    return { is_selected: false }
   },
   methods: {
     emitState: function (value, event) {
@@ -32,7 +34,11 @@ export default {
       } else {
         state = 'remove'
       }
-      this.$bus.$emit('change-option', {state: state, question_id: this.question_id, option_id: this.option.id})
+      this.$bus.$emit('change-option', {
+        state: state,
+        question_id: this.question_id,
+        option_id: this.option.id
+      })
     }
   }
 }

@@ -13,7 +13,7 @@
       <div class="mdui-typo-caption">{{ question.explanation }}</div>
       <div class="mdui-container">
         <ul class="mdui-list">
-          <div v-for="option in question.options" class="mdui-col-4">
+          <div v-for="option in question.options" :key="option.id" class="mdui-col-4">
             <vote-option-result v-bind="{option: option}"></vote-option-result>
           </div>
         </ul>
@@ -33,11 +33,13 @@ export default {
     VoteOptionResult
   },
   created: function () {
-    this.question.options.sort(function (a, b) {
-      return b.count - a.count
-    }).forEach((item, index) => {
-      item.index = index + 1
-    })
+    this.question.options
+      .sort(function (a, b) {
+        return b.count - a.count
+      })
+      .forEach((item, index) => {
+        item.index = index + 1
+      })
   },
   computed: {}
 }

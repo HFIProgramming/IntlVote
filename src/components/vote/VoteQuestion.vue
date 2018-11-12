@@ -13,7 +13,7 @@
     <div class="mdui-card-content">
       <div class="mdui-typo-caption">{{ question.explanation }}</div>
       <div class="mdui-container">
-        <div v-for="option in options" class="mdui-col-4">
+        <div v-for="option in options" :key="option.id" class="mdui-col-4">
           <vote-option v-if="type === 'radio'"
                        v-bind="{question_id: question_id, option: option}"></vote-option>
           <vote-multiple-option v-else-if="type === 'checkbox'"
@@ -37,8 +37,9 @@ export default {
     VoteMultipleOption
   },
   mounted: function () {
-    this.$bus.$on('change-option', (pack) => {
-      if (pack.question_id === this.question.id) { // myself
+    this.$bus.$on('change-option', pack => {
+      if (pack.question_id === this.question.id) {
+        // myself
         if (pack.state === 'add') {
           this.selected_id.push(pack.option_id)
         } else if (pack.state === 'remove') {
@@ -65,7 +66,11 @@ export default {
       if (n === o) {
         s = 0
       }
-      this.$bus.$emit('question-status', {state: n, question_id: this.question_id, status: s})
+      this.$bus.$emit('question-status', {
+        state: n,
+        question_id: this.question_id,
+        status: s
+      })
     }
   },
   computed: {
