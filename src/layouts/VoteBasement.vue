@@ -5,7 +5,7 @@
     <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
                          v-bind:description="description"></landing-description>
     <div class="mdui-col-xs-12 mdui-m-t-2">
-      <vote-card v-bind:questions="questions" v-bind:url="url"></vote-card>
+      <vote-card v-bind:questions="questions" v-bind:url="url" v-bind:end_word="end_word"></vote-card>
     </div>
   </div>
   <show-dialog v-else v-bind:message="`操作将不能进行，请返回`"></show-dialog>
@@ -28,7 +28,12 @@ export default {
   },
   data () {
     return {
-      url: 'https://vote.hfi.me' + '/vote/id/' + this.vote_id + '/ticket/' + this.ticket,
+      url:
+        'https://vote.hfi.me' +
+        '/vote/id/' +
+        this.vote_id +
+        '/ticket/' +
+        this.ticket,
       json: null,
       loading: false,
       err: null
@@ -70,7 +75,7 @@ export default {
       this.$mdui.JQ.ajax({
         method: 'GET',
         url: this.url,
-        success: (data) => {
+        success: data => {
           this.loading = false
           this.json = JSON.parse(data)
           if (this.json.status === '200') {
