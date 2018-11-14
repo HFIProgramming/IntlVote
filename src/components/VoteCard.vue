@@ -81,6 +81,7 @@ export default {
         } else if (n.status === '200') {
           this.$mdui.alert(
             this.end_word,
+            '结束语',
             () => {
               this.$mdui.snackbar({
                 message: '提交成功！正在返回……',
