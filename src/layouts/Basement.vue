@@ -45,6 +45,7 @@ export default {
   },
   computed: {
     title: function () {
+      document.title = this.vote_group.title + '- 编程社'
       return this.vote_group.title
     },
     subtitle: function () {

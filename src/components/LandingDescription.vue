@@ -14,7 +14,7 @@
       </div>
 
       <!-- 卡片的内容 -->
-      <div class="mdui-card-content">{{ description }}</div>
+      <div class="mdui-card-content" v-html="description"></div>
 
     </div>
   </div>
