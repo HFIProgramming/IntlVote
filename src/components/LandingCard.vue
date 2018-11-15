@@ -36,7 +36,8 @@
                    :to="{ name: 'VoteResult', params: {ticket: ticket,vote_id: vote.id}}">
         <button class="mdui-btn mdui-ripple">查看当前投票结果</button>
       </router-link>
-      <button v-else class="mdui-btn mdui-ripple" disabled>投票后可以查看结果</button>
+      <button v-else-if="vote.show_result === '1'" class="mdui-btn mdui-ripple" disabled>投票后可以查看结果</button>
+      <button v-else class="mdui-btn mdui-ripple" disabled>当前投票不展示结果</button>
     </div>
   </div>
 </template>
