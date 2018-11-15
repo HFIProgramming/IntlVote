@@ -19,7 +19,7 @@ export default new Router({
     }
   },
   {
-    path: '/vote/ticket/:ticket/vote/:vote_id/',
+    path: '/vote/ticket/:ticket/vote/:vote_id',
     name: 'VoteBasement',
     component: VoteBasement,
     props: true,
@@ -28,7 +28,7 @@ export default new Router({
     }
   },
   {
-    path: '/vote/ticket/:ticket/',
+    path: '/vote/ticket/:ticket',
     name: 'Basement',
     component: Basement,
     props: true,
