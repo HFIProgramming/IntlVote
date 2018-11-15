@@ -2,9 +2,11 @@
   <show-process v-bind:loading="loading" v-if="this.loading"></show-process>
   <show-dialog v-else-if="this.err !== null" v-bind:message="this.err"></show-dialog>
   <div v-else-if="is_active" class="mdui-container">
-
-      <landing-description v-bind:title="title" v-bind:subtitle="subtitle"
-                           v-bind:description="intro"></landing-description>
+      <landing-description
+        v-bind:title="title"
+        v-bind:subtitle="subtitle"
+        v-bind:description="intro"
+        v-bind:pic="pic"></landing-description>
     <div class="mdui-m-t-0">
       <template v-for="vote in groups">
         <landing-card v-bind="{vote: vote, ticket: ticket}" v-bind:key="vote.id"></landing-card>
